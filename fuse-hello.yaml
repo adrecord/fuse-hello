@@ -1,0 +1,49 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2023-02-07T14:18:25Z"
+  labels:
+    app: fuse-hello-pod
+  name: fuse-hello-pod
+spec:
+  containers:
+
+  - name: adapter
+    image: fuse-hello:latest
+    securityContext:
+      privileged: true
+    command: ["/bin/bash", "-c"]
+    args:
+      - |
+        mkdir /sharedvol/fuse
+        ./hello /sharedvol/fuse
+        while true
+        do
+          cat /sharedvol/fuse/hello
+          sleep 1
+        done
+    volumeMounts:
+    - mountPath: /sharedvol
+      name: shared-vol
+      mountPropagation: Bidirectional
+
+  - name: user
+    image: docker.io/alpine:latest
+    command: ["/bin/sh", "-c"]
+    args:
+      - |
+        while true
+        do
+          cat /sharedvol/fuse/hello
+          sleep 1
+        done
+    volumeMounts:
+    - mountPath: /sharedvol
+      name: shared-vol
+      mountPropagation: Bidirectional
+
+  volumes:
+  - name: shared-vol
+    emptyDir: {}
+
