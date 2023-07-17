@@ -10,7 +10,8 @@ spec:
   containers:
 
   - name: adapter
-    image: fuse-hello:latest
+    #image: fuse-hello:latest
+    image: docker.io/adrec/fuse-hello:latest
     securityContext:
       privileged: true
     command: ["/bin/bash", "-c"]
@@ -30,6 +31,8 @@ spec:
 
   - name: user
     image: docker.io/alpine:latest
+    securityContext:
+      privileged: true
     command: ["/bin/sh", "-c"]
     args:
       - |
