@@ -19,7 +19,7 @@ $ podman push docker.io/adrec/fuse-hello:latest
 
 # Running
 
-# Running with podman
+## Running with podman
 
 1. Run the pod with podman
 
