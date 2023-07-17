@@ -7,10 +7,10 @@ metadata:
     app: fuse-hello-pod
   name: fuse-hello-pod
 spec:
+  hostUsers: false
   containers:
 
   - name: adapter
-    #image: fuse-hello:latest
     image: docker.io/adrec/fuse-hello:latest
     securityContext:
       privileged: true
