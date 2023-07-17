@@ -80,7 +80,7 @@ Hello World!
 4. Delete the pod
 
 ```
-$ kubectr delete -f ./fuse-hello.yaml
+$ kubectl delete -f ./fuse-hello.yaml
 ```
 
 
